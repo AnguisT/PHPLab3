@@ -20,16 +20,33 @@
 		   // 7 readfile — Выводит файл
 		   // 7 file — Читает содержимое файла и помещает его в массив
 		   // 8 file_put_contents — Пишет строку в файл
-            echo file_exists("file.txt");
-            echo is_readable("file.txt");
-            echo is_writable("file.txt");
+            $fe=file_exists("file.txt");
+			if ($fe == 1) {
+				echo "File is!<br/>";
+			} else {
+				echo "No file!<br/>";
+			}
+            $ir=is_readable("file.txt");
+            if ($ir == 1) {
+				echo "The file exists and is readable!<br/>";
+			} else {
+				echo "The file does not exist and can not be read!<br/>";
+			}
+			$iw=is_writable("file.txt");
+            if ($ir == 1) {
+				echo "File is writable!<br/>";
+			} else {
+				echo "File not writable!<br/>";
+			}
 			$file=file("file.txt");
             $fp=fopen("file.txt","w");
+			$fs=filesize("file.txt");
+			echo "File.txt is " . $fs . " bytes<br/>";
             for($i=0;$i<sizeof($file);$i++) {
                 echo $file[$i];
             }
             fwrite($fp,"Hello world!!<br>");
-            unset($file[3]);
+            unset($file[2]);
             fputs($fp,implode("",$file));
 
             fclose($fp);
